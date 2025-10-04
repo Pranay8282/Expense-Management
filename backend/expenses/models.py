@@ -14,6 +14,7 @@ class Expense(models.Model):
     receipt_image = models.ImageField(upload_to="receipts/", null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="PENDING")
     created_at = models.DateTimeField(auto_now_add=True)
+    approval_flow_history = models.ForeignKey('ApprovalFlow', on_delete=models.SET_NULL, null=True, blank=True, related_name="expenses_history")
 
     def __str__(self):
         return f"{self.description} - {self.employee.username}"
@@ -44,3 +45,29 @@ class OCRRecord(models.Model):
     extracted_amount = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     extracted_date = models.DateField(null=True, blank=True)
     extracted_description = models.CharField(max_length=255, null=True, blank=True)
+
+# --- Add the following new models ---
+
+class ApprovalFlow(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="approval_flows")
+    name = models.CharField(max_length=255)
+    is_default = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+class ApprovalFlowStep(models.Model):
+    ROLE_CHOICES = [
+        ('MANAGER', 'Manager'),
+        ('ADMIN', 'Admin'),
+    ]
+    approval_flow = models.ForeignKey(ApprovalFlow, on_delete=models.CASCADE, related_name="steps")
+    step_number = models.IntegerField()
+    approver_role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+
+    class Meta:
+        ordering = ['step_number']
+
+    def __str__(self):
+        return f"Step {self.step_number}: {self.approver_role} for {self.approval_flow.name}"

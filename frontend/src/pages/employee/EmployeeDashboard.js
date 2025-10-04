@@ -9,7 +9,7 @@ const EmployeeDashboard = () => {
 
   const fetchExpenses = useCallback(async () => {
     try {
-      const response = await api.get('/expenses/');
+      const response = await api.get('/expenses/claims/');
       setExpenses(response.data);
     } catch (error) {
       console.error("Failed to fetch expenses", error);

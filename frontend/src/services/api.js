@@ -23,7 +23,8 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+    // Check if error.response exists before accessing status
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const tokens = JSON.parse(localStorage.getItem('authTokens'));
       const refreshToken = tokens?.refresh;

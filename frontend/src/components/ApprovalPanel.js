@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import api from '../../services/api';
+import api from '../services/api';
 import toast from 'react-hot-toast';
 import dayjs from 'dayjs';
-import AuthContext from '../../context/AuthContext';
+import AuthContext from '../context/AuthContext';
 
-const ManagerDashboard = () => {
+const ApprovalPanel = () => {
   const [queue, setQueue] = useState([]);
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [action, setAction] = useState(null); // 'approve' or 'reject'
@@ -51,7 +51,7 @@ const ManagerDashboard = () => {
   };
 
   return (
-    <div>
+    <div className="mt-8">
       <h2 className="text-2xl font-semibold text-gray-700 mb-4">Approval Queue</h2>
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
@@ -67,25 +67,13 @@ const ManagerDashboard = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {queue.map((expense) => (
               <tr key={expense.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {expense.employee.first_name} {expense.employee.last_name}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {dayjs(expense.date).format('MMM D, YYYY')}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {expense.description}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {expense.converted_amount} {user?.company?.currency}
-                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{expense.employee.first_name} {expense.employee.last_name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{dayjs(expense.date).format('MMM D, YYYY')}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{expense.description}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{expense.converted_amount} {user?.company?.currency}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                  <button onClick={() => openModal(expense, 'approve')} className="text-indigo-600 hover:text-indigo-900">
-                    Approve
-                  </button>
-                  <button onClick={() => openModal(expense, 'reject')} className="text-red-600 hover:text-red-900">
-                    Reject
-                  </button>
+                  <button onClick={() => openModal(expense, 'approve')} className="text-indigo-600 hover:text-indigo-900">Approve</button>
+                  <button onClick={() => openModal(expense, 'reject')} className="text-red-600 hover:text-red-900">Reject</button>
                 </td>
               </tr>
             ))}
@@ -94,7 +82,6 @@ const ManagerDashboard = () => {
         {queue.length === 0 && <p className="text-center text-gray-500 p-4">Approval queue is empty.</p>}
       </div>
 
-      {/* Modal */}
       {selectedExpense && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
@@ -119,4 +106,4 @@ const ManagerDashboard = () => {
   );
 };
 
-export default ManagerDashboard;
+export default ApprovalPanel;
