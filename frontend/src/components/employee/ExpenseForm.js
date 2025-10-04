@@ -52,7 +52,7 @@ const ExpenseForm = ({ onExpenseAdded }) => {
     formData.append('currency', user.company.currency);
 
     try {
-      await api.post('/expenses/', formData, {
+      await api.post('/expenses/claims/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -61,7 +61,11 @@ const ExpenseForm = ({ onExpenseAdded }) => {
       reset();
       onExpenseAdded();
     } catch (error) {
-      toast.error('Failed to submit expense.');
+      if (error.code === "ERR_NETWORK") {
+        toast.error('Network Error: Could not connect to the server. Is it running?');
+      } else {
+        toast.error('Failed to submit expense.');
+      }
       console.error(error);
     }
   };

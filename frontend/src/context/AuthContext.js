@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
         }).then(res => setUser(res.data)).catch(() => logoutUser());
     }
     setLoading(false);
-  }, [authTokens]);
+      }, [authTokens, logoutUser]);
 
   const contextData = {
     user,

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import ApprovalPanel from '../../components/ApprovalPanel';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({ totalExpenses: 0, pending: 0, approved: 0 });
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
-    api.get('/expenses/').then(res => {
+    api.get('/expenses/claims/').then(res => {
       const data = res.data;
       setExpenses(data);
       const newStats = {
@@ -56,7 +57,8 @@ const AdminDashboard = () => {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      {/* User Management is now on its own page, accessible from the sidebar. */}
+      
+      <ApprovalPanel />
     </div>
   );
 };

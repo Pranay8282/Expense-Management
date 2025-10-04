@@ -71,7 +71,7 @@ class Command(BaseCommand):
             currency='USD',
             converted_amount=decimal.Decimal('150.75'),
             category='Travel',
-            description='Client meeting lunch',
+            description='Client meeting lunch in New York',
             date=timezone.now().date(),
             status='PENDING'
         )
@@ -85,6 +85,28 @@ class Command(BaseCommand):
             description='New design software subscription',
             date=timezone.now().date(),
             status='PENDING'
+        )
+
+        Expense.objects.create(
+            employee=employee1,
+            amount=decimal.Decimal('45.50'),
+            currency='USD',
+            converted_amount=decimal.Decimal('45.50'),
+            category='Food & Dining',
+            description='Team dinner after project completion',
+            date=timezone.now().date() - timezone.timedelta(days=5),
+            status='APPROVED'
+        )
+
+        Expense.objects.create(
+            employee=employee2,
+            amount=decimal.Decimal('250.00'),
+            currency='USD',
+            converted_amount=decimal.Decimal('250.00'),
+            category='Office Supplies',
+            description='New ergonomic chair for home office',
+            date=timezone.now().date() - timezone.timedelta(days=10),
+            status='REJECTED'
         )
 
         self.stdout.write(self.style.SUCCESS('Successfully seeded database.'))
