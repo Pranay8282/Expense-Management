@@ -12,6 +12,7 @@ const StatusBadge = ({ status }) => {
     return <span className={`${baseClasses} ${statusClasses[status]}`}>{status}</span>;
 };
 
+ 
 const ExpenseList = ({ expenses }) => {
   const [expandedRow, setExpandedRow] = useState(null);
 
@@ -22,7 +23,7 @@ const ExpenseList = ({ expenses }) => {
   if (!expenses || expenses.length === 0) {
     return <p className="text-center text-gray-500 mt-8">No expenses found.</p>;
   }
-
+    
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg">
       <table className="min-w-full divide-y divide-gray-200">
