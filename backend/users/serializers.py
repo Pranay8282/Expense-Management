@@ -6,48 +6,48 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ['id', 'name', 'country', 'currency']
 
-class UserSerializer(serializers.ModelSerializer):
-    company = CompanySerializer(read_only=True)
+class UserSerializer(serializers.ModelSerializer): 
+    company = CompanySerializer(read_only=True) 
     manager = serializers.StringRelatedField()
-
-    class Meta:
-        model = User
+ 
+    class Meta: 
+        model = User 
         fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role', 'company', 'manager', 'is_manager_approver']
-
-class RegisterSerializer(serializers.ModelSerializer):
-    company_name = serializers.CharField(write_only=True, required=True)
+ 
+class RegisterSerializer(serializers.ModelSerializer): 
+    company_name = serializers.CharField(write_only=True, required=True)  
     country = serializers.CharField(write_only=True, required=True)
-    currency = serializers.CharField(write_only=True, required=True)
+    currency = serializers.CharField(write_only=True, required=True) 
 
     class Meta:
-        model = User
+        model = User 
         fields = ('id', 'username', 'password', 'email', 'first_name', 'last_name', 'company_name', 'country', 'currency')
-        extra_kwargs = {'password': {'write_only': True}}
+        extra_kwargs = {'password': {'write_only': True}} 
 
-    def create(self, validated_data):
+    def create(self, validated_data): 
         company = Company.objects.create(
             name=validated_data['company_name'],
-            country=validated_data['country'],
-            currency=validated_data['currency']
+            country=validated_data['country'],  
+            currency=validated_data['currency'] 
         )
         user = User.objects.create_user(
-            username=validated_data['username'],
-            password=validated_data['password'],
-            email=validated_data['email'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            role='ADMIN',
-            company=company
+            username=validated_data['username'], 
+            password=validated_data['password'], 
+            email=validated_data['email'], 
+            first_name=validated_data['first_name'], 
+            last_name=validated_data['last_name'], 
+            role='ADMIN', 
+            company=company 
         )
-        return user
+        return user 
 
-class UserCreateSerializer(serializers.ModelSerializer):
+class UserCreateSerializer(serializers.ModelSerializer): 
     class Meta:
         model = User
         fields = ('username', 'password', 'email', 'first_name', 'last_name', 'role', 'manager', 'is_manager_approver')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
+        extra_kwargs = {'password': {'write_only': True}} 
+  
+    def create(self, validated_data): 
         # Assumes the request user is an admin and sets the company
         request_user = self.context['request'].user
         user = User.objects.create_user(
