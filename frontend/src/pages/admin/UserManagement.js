@@ -48,32 +48,32 @@ const UserManagement = () => {
                     Add User
                 </button>
             </div>
-            <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                        <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Username</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Manager</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {users.map((user) => (
-                            <tr key={user.id}>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.first_name} {user.last_name}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.username}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.role}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.manager || 'N/A'}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button onClick={() => handleEditUser(user)} className="text-indigo-600 hover:text-indigo-900">Edit</button>
-                                </td>
+                <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Username</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Manager</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {users.map((user) => (
+                                <tr key={user.id}>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.first_name} {user.last_name}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.username}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.role}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.manager || 'N/A'}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button onClick={() => handleEditUser(user)} className="text-indigo-600 hover:text-indigo-900">Edit</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
