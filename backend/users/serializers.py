@@ -5,7 +5,7 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = ['id', 'name', 'country', 'currency']
-
+        
 class UserSerializer(serializers.ModelSerializer): 
     company = CompanySerializer(read_only=True) 
     manager = serializers.StringRelatedField()
