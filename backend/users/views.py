@@ -12,37 +12,37 @@ class RegisterView(generics.CreateAPIView):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
+        response = super().post(request, *args, **kwargs) 
         user = User.objects.get(username=request.data['username'])
         response.data['user'] = UserSerializer(user).data
-        return response
+        return response 
 
-class UserProfileView(generics.RetrieveUpdateAPIView):
+class UserProfileView(generics.RetrieveUpdateAPIView): 
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_object(self):
+    def get_object(self): 
         return self.request.user
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ModelViewSet): 
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdminOrReadOnly]
 
-    def get_queryset(self):
+    def get_queryset(self):  
         user = self.request.user
-        if user.is_staff or user.role == 'ADMIN':
+        if user.is_staff or user.role == 'ADMIN': 
             return User.objects.filter(company=user.company)
-        return User.objects.none()
+        return User.objects.none() 
 
-    def get_serializer_class(self):
+    def get_serializer_class(self): 
         if self.action in ['create', 'update', 'partial_update']:
-            return UserCreateSerializer
+            return UserCreateSerializer 
         return UserSerializer
 
-    def perform_update(self, serializer):
+    def perform_update(self, serializer): 
         user = serializer.save()
-        password = self.request.data.get('password')
+        password = self.request.data.get('password') 
         if password:
-            user.set_password(password)
-            user.save()
+            user.set_password(password) 
+            user.save() 
