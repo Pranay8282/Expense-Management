@@ -1,6 +1,6 @@
-# MoneyPath – Smart Expense Reimbursement System
+# XpenseMate – Smart Expense Reimbursement System
 
-MoneyPath is a full-stack smart expense management application designed to streamline and automate the expense reimbursement process for companies. It features OCR for receipt scanning, role-based access control, and a multi-level approval workflow.
+XpenseMate is a full-stack smart expense management application designed to streamline and automate the expense reimbursement process for companies. It features OCR for receipt scanning, role-based access control, and a multi-level approval workflow.
 
 ## Core Features
 
