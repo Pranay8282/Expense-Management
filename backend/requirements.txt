@@ -3,5 +3,6 @@ djangorestframework
 djangorestframework-simplejwt
 django-cors-headers
 Pillow
-pytesseract
 requests
+pytesseract
+
