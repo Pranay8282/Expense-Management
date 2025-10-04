@@ -1,0 +1,26 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+
+# Django artifacts
+db.sqlite3
+/media/
+
+# Node artifacts
+node_modules/
+npm-debug.log
+yarn-error.log
+build/
+.DS_Store
+
+# IDE configuration files
+.vscode/
+.idea/
+
+# Environment variables
+.env
