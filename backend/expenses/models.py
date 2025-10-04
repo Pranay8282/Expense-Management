@@ -19,6 +19,7 @@ class Expense(models.Model):
     def __str__(self):
         return f"{self.description} - {self.employee.username}"
 
+
 class ApprovalStep(models.Model):
     STATUS_CHOICES = [("PENDING","Pending"), ("APPROVED","Approved"), ("REJECTED","Rejected")]
 
@@ -65,7 +66,7 @@ class ApprovalFlowStep(models.Model):
     approval_flow = models.ForeignKey(ApprovalFlow, on_delete=models.CASCADE, related_name="steps")
     step_number = models.IntegerField()
     approver_role = models.CharField(max_length=20, choices=ROLE_CHOICES)
-
+        
     class Meta:
         ordering = ['step_number']
 

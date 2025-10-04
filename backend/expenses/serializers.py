@@ -5,6 +5,7 @@ from users.serializers import UserSerializer
 class ApprovalStepSerializer(serializers.ModelSerializer):
     approver = UserSerializer(read_only=True)
 
+
     class Meta:
         model = ApprovalStep
         fields = ['id', 'approver', 'step_number', 'status', 'comments', 'acted_at']
@@ -26,6 +27,8 @@ class ApprovalActionSerializer(serializers.Serializer):
     comments = serializers.CharField(required=False, allow_blank=True)
 
 # --- Add the following new serializers ---
+
+
 
 class ApprovalFlowStepSerializer(serializers.ModelSerializer):
     class Meta:
