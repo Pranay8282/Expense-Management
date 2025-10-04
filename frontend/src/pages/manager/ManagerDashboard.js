@@ -9,17 +9,17 @@ const ManagerDashboard = () => {
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [action, setAction] = useState(null); // 'approve' or 'reject'
   const [comments, setComments] = useState('');
-  const { user } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
-  const fetchQueue = useCallback(async () => {
-    try {
-      const response = await api.get('/expenses/claims/approval_queue/');
-      setQueue(response.data);
-    } catch (error) {
-      console.error("Failed to fetch approval queue", error);
-      toast.error("Could not load approval queue.");
-    }
-  }, []);
+    const fetchQueue = useCallback(async () => {
+      try {
+        const response = await api.get('/expenses/claims/approval_queue/');
+        setQueue(response.data);
+      } catch (error) {
+        console.error("Failed to fetch approval queue", error);
+        toast.error("Could not load approval queue.");
+      }
+    }, []);
 
   useEffect(() => {
     fetchQueue();
